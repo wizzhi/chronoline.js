@@ -152,7 +152,7 @@ function Chronoline(domElement, events, options) {
         fitVisibleSpan: false, // condense the entire span to be visible without scrolling
 
         topMargin: 40,  // overhead space on the canvas. useful for additional content
-        eventHeight: 5,  // how tall event events are
+        eventHeight: 9,  // how tall event events are
         eventMargin: 4,  // how far apart the events are
         dateLabelHeight: 50, // how tall the bottom margin for the dates is
         hashLength: 4,  // length of the hash marks for the days
@@ -201,7 +201,7 @@ function Chronoline(domElement, events, options) {
         sections: [],
         floatingSectionLabels: true,
         sectionLabelAttrs: {},
-        sectionLabelsOnHover: true,
+        sectionLabelsOnHover: false,
 
         draggable: false, // requires jQuery, allows mouse dragging
 
@@ -458,12 +458,12 @@ function Chronoline(domElement, events, options) {
                 if(typeof section.attrs != "undefined"){
                     elem.attr(section.attrs);
                 }
-                var sectionLabel = t.paper.text(startX + 10, 10, section.title);
+                var sectionLabel = t.paper.text(startX + 10, 8, section.title);
                 sectionLabel.attr('text-anchor', 'start');
                 sectionLabel.attr(t.sectionLabelAttrs);
                 if(t.floatingSectionLabels){
                     // bounds determine how far things can float
-                    sectionLabel.data('left-bound', startX + 10);
+                    sectionLabel.data('left-bound', startX );
                     sectionLabel.data('right-bound', startX + width - sectionLabel.attr('width'));
                     t.floatingSet.push(sectionLabel);
                     t.sectionLabelSet.push(sectionLabel);
@@ -513,6 +513,10 @@ function Chronoline(domElement, events, options) {
                     addElemClass(t.paperType, rightCircle.node, 'chronoline-event');
                     elem = t.paper.rect(startX, upperY, width, t.eventHeight)
                         .attr(t.eventAttrs);
+					// wizz print evnet text over bar
+                    var evtTxt = t.paper.text(startX+width/2, upperY+t.eventHeight/2, myEvent.title).attr({'text-anchor':'middle',fill: '#FFFFFF'});
+                    addElemClass(t.paperType, evtTxt.node, 'chronoline-event');
+
                 }
                 if (t.eventClick || t.eventDblClick) {
                     elem.data("eventData", myEvent);
@@ -1064,3 +1068,4 @@ function Chronoline(domElement, events, options) {
     t.init();//initilize the timline canvas
     return t;
 }
+
