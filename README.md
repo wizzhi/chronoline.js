@@ -1,4 +1,4 @@
-Trying to hack into a Sprint Overview Calendar
+Trying to hack for Scrum Backlog Overview
 =============
 
 * auto create "sections" of every 2 weeks as Sprints
